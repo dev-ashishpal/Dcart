@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-contract myToken {
-    string constant public name = "Ashish";
+contract Token {
+    string constant public name = "Ashish Token";
     string constant public symbol = "ASH";
     uint8 constant public decimal = 18;
     address admin;
     address self;
     uint256 _totalSupply;
-    uint256 tokensSold = 0;
-    uint256 tokenPrice = 1000000000000000;
+    uint256 public tokensSold = 0;
+    uint256 constant public tokenPrice = 1000000000000000;
 
-    mapping(address => uint256)balances;
-    mapping(address => mapping(address => uint256)) allowed;
+    mapping(address => uint256) public balances;
+    mapping(address => mapping(address => uint256)) public allowed;
 
 
-    event Approval(address indexed tokenOwner, address indexed sepnder, uint tokens);
+    event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
     event Transfer(address indexed from, address indexed to, uint tokens);
 
 
@@ -25,6 +25,10 @@ contract myToken {
         admin = msg.sender;
         self = address(this);
     }
+
+	function adminAddress() public view returns (address) {
+		return admin;
+	}
 
     function totalSupply() public view returns (uint256) {
         return _totalSupply;
@@ -56,14 +60,14 @@ contract myToken {
         return allowed[owner][delegate];
     }
 
-    function transferFrom(address owner, address buyer, uint numToken) public returns (bool) {
-        require(numToken <= balances[owner]);
-        require(numToken <= allowed[owner][buyer]);
+    function transferFrom(address from, address to, uint numToken) public returns (bool) {
+        require(numToken <= balances[from]);
+        require(numToken <= allowed[from][msg.sender]);
 
-        balances[owner] = balances[owner] - numToken;
-        allowed[owner][buyer] = allowed[owner][buyer] - numToken;
-        balances[buyer] = balances[owner] - numToken;
-        emit Transfer(owner, buyer, numToken);
+        balances[from] -= numToken;
+        allowed[from][msg.sender] -= numToken;
+        balances[to] += numToken;
+        emit Transfer(from, to, numToken);
 
         return true;
     }
