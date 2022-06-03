@@ -1,0 +1,19 @@
+.Backdrop {
+  background-color: hsla(
+    var(--color-tertiary-h),
+    var(--color-tertiary-s),
+    var(--color-tertiary-l),
+    0.7
+  );
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 150;
+  display: none;
+}
+
+.Backdrop {
+  display: block;
+}
