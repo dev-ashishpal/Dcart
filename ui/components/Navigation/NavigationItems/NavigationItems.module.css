@@ -1,0 +1,59 @@
+.NavigationList {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 6rem;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	/* width: 90%; */
+	margin: 0 6rem;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+
+.NavigationStart {
+	flex: 1;
+}
+
+.NavigationStart button {
+	background-color: transparent;
+	border: none;
+	color: var(--primary-color);
+	/* width: 10rem; */
+}
+
+
+.NavigationCenter {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	flex: 4;
+}
+
+.NavigationCenterLogo {
+	margin: 0 5rem;
+}
+
+.NavigationList li {
+	text-decoration: none;
+	list-style: none;
+}
+
+.NavigationEnd {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	flex: 1;
+	justify-content: flex-end;
+	/* background-color: blue; */
+}
+
+.NavigationEndFirst {
+	margin-right: 3rem;
+}
+
+.Active {
+	color: var(--secondary-color);
+}

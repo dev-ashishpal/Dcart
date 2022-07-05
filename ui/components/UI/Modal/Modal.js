@@ -3,7 +3,7 @@ import classes from "./Modal.module.css";
 import Backdrop from "../Backdrop/Backdrop";
 import PropTypes from "prop-types";
 
-const modal = (props) => {
+const Modal = (props) => {
   return props.show ? (
     <Fragment>
       <Backdrop clicked={props.clicked} show={props.show} />
@@ -12,10 +12,10 @@ const modal = (props) => {
   ) : null;
 };
 
-modal.propTypes = {
+Modal.propTypes = {
   show: PropTypes.bool,
 
   clicked: PropTypes.func,
 };
 
-export default modal;
+export default Modal;

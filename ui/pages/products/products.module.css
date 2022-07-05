@@ -1,0 +1,48 @@
+.Container {
+  margin: 5rem 6rem;
+  /* background-color: orangered; */
+}
+
+.Header h1 {
+  font-size: 4.5rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+
+.Sort {
+	display: flex;
+	width: 100%;
+	/* background-color: blue; */
+	justify-content: space-between;
+	font-weight: 600;
+	margin-top: 2rem;
+}
+
+.SortRight {
+	display: flex;
+}
+
+.SortRight span {
+	margin-right: 5px;
+}
+
+.SortSelect {
+	color: var(--secondary-color);
+}
+
+.Line {
+	border-top: 1px solid var(--primary-color-light);
+	display: block;
+	width: 100%;
+	opacity: 50%;
+}
+
+.ProductList {
+  display: grid;
+  grid-row-gap: 3rem;
+  grid-column-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  margin: 3rem 0;
+}

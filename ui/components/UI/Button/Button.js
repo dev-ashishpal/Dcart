@@ -1,20 +1,20 @@
 import React from "react";
-import classes from "./SubmitBtn.module.css";
+import classes from "./Button.module.css";
 import PropTypes from "prop-types";
 
-const submitButton = (props) => (
+const Button = (props) => (
   <button
-    onClick={props.clicked}
+    onClick={props.onClick}
     className={classes.Btn}
     disabled={props.disabled}
   >
-    Submit
+    {props.children}
   </button>
 );
 
-submitButton.propTypes = {
+Button.propTypes = {
   disabled: PropTypes.bool,
   clicked: PropTypes.func,
 };
 
-export default submitButton;
+export default Button;

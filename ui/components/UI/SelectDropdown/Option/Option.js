@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Option.module.css";
 import PropTypes from "prop-types";
-import Select from "../Select";
+// import Select from "../Select";
 
 const option = (props) => (
   <div className={classes.Option}>

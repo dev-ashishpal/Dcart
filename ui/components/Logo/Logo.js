@@ -1,10 +1,8 @@
 import React from "react";
 import classes from "./Logo.module.css";
-
+// import Link from "next/link";
 const logo = () => (
-  <a href="/" className={classes.Logo}>
-    D
-  </a>
+    <div className={classes.Logo}>D</div>
 );
 
 export default logo;

@@ -15,9 +15,5 @@ const Navigation = (props) => {
   );
 };
 
-Navigation.propTypes = {
-  showLoginHandler: PropTypes.func,
-  showSignupHandler: PropTypes.func,
-};
 
 export default Navigation;
