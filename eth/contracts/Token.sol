@@ -9,7 +9,7 @@ contract Token {
     address self;
     uint256 _totalSupply;
     uint256 public tokensSold = 0;
-    uint256 constant public tokenPrice = 1000000000000000;
+    uint256 constant public tokenPrice = 9400000000000;
 
     mapping(address => uint256) public balances;
     mapping(address => mapping(address => uint256)) public allowed;
@@ -42,11 +42,11 @@ contract Token {
         return balances[admin];
     }
 
-    function transfer(address reciever, uint numToken) public returns (bool) {
-        require(numToken <= balances[msg.sender]);
-        balances[msg.sender] = balances[msg.sender] - numToken;
+    function transfer(address sender, address reciever, uint numToken) public returns (bool) {
+        require(numToken <= balances[sender]);
+        balances[sender] = balances[sender] - numToken;
         balances[reciever] = balances[reciever] + numToken;
-        emit Transfer(msg.sender, reciever, numToken);
+        emit Transfer(sender, reciever, numToken);
         return true;
     }
 
@@ -81,7 +81,7 @@ contract Token {
     }
 
     function buyToken(uint256 numberOfToken) public payable {
-        // require(numberOfToken * tokenPrice == msg.value);
+        require(numberOfToken * tokenPrice == msg.value);
         require(balances[admin] >= numberOfToken);
         balances[admin] -= numberOfToken;
         balances[msg.sender] += numberOfToken;

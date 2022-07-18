@@ -18,7 +18,7 @@ const Select = (props) => {
     // });
   };
 
-  console.log("select.js", props.list);
+  // console.log("select.js", props.list);
   let containerClass = [classes.SearchFilterContainer];
   if (opened) {
     containerClass = [classes.SearchFilterContainer, classes.Active];

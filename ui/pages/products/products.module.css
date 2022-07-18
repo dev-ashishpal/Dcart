@@ -1,6 +1,23 @@
 .Container {
-  margin: 5rem 6rem;
+  margin: 10rem 6rem;
+  position: relative;
   /* background-color: orangered; */
+}
+
+.Add {
+	position: fixed;
+	bottom: 2rem;
+	right: 5rem;
+	outline: none;
+	border: none;
+	border-radius: 50%;
+	color: inherit;
+	cursor: pointer;
+	background-color: var(--secondary-color);
+}
+.Add svg {
+	width: 8rem;
+	height: 8rem;
 }
 
 .Header h1 {

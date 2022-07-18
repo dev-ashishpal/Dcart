@@ -1,8 +1,7 @@
 import React from "react";
-// import Image from "next/image";
 import classes from "./Product.module.css";
-import { MdShoppingCart } from "react-icons/md";
-// import image from "../../assets/images/1.jpg";
+import { MdShoppingCart, MdCreditCard } from "react-icons/md";
+import Link from "next/link";
 
 const Product = (props) => {
   return (
@@ -11,18 +10,24 @@ const Product = (props) => {
         <figure className={classes.ProductImage}>
           <img src={props.image} alt={props.title} />
         </figure>
-        <span className={classes.ProductCart}>
-          <button className="Icon">
-            <MdShoppingCart />
-          </button>
-        </span>
+        {props.icon ? (
+          <span className={classes.ProductCart}>
+            <button onClick={props.onClick} className="Icon">
+              <MdCreditCard />
+            </button>
+          </span>
+        ) : null}
       </div>
-      <a className={classes.ProductBottom}>
-        <header className={classes.ProductTitle}>
-          <h3>{props.title}</h3>
-        </header>
-        <span className={classes.ProductPrice}>{props.price}</span>
-      </a>
+      {props.id ? (
+        <Link href={`products/${props.id}`}>
+          <a className={classes.ProductBottom}>
+            <header className={classes.ProductTitle}>
+              <h3>{props.title}</h3>
+            </header>
+            <span className={classes.ProductPrice}>A. {props.price}</span>
+          </a>
+        </Link>
+      ) : null}
     </article>
   );
 };

@@ -1,59 +1,74 @@
 .NavigationList {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	height: 6rem;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	/* width: 90%; */
-	margin: 0 6rem;
-	text-transform: uppercase;
-	font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 6rem;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  /* width: 90%; */
+  margin: 0 6rem;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .NavigationStart {
-	flex: 1;
+  flex: 1;
+}
+
+.UserType {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: inherit;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    var(--primary-color) 15%,
+    var(--tertiary-color) 10%,
+    var(--secondary-color) 35%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100%;
+  background-repeat: repeat;
 }
 
 .NavigationStart button {
-	background-color: transparent;
-	border: none;
-	color: var(--primary-color);
-	/* width: 10rem; */
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  /* width: 10rem; */
 }
 
-
 .NavigationCenter {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	flex: 4;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  flex: 4;
 }
 
 .NavigationCenterLogo {
-	margin: 0 5rem;
+  margin: 0 5rem;
 }
 
 .NavigationList li {
-	text-decoration: none;
-	list-style: none;
+  text-decoration: none;
+  list-style: none;
 }
 
 .NavigationEnd {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	flex: 1;
-	justify-content: flex-end;
-	/* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 1;
+  justify-content: flex-end;
+  /* background-color: blue; */
 }
 
 .NavigationEndFirst {
-	margin-right: 3rem;
+  margin-right: 3rem;
 }
 
 .Active {
-	color: var(--secondary-color);
+  color: var(--secondary-color);
 }

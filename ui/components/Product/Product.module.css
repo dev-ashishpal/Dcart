@@ -1,75 +1,79 @@
 .Product {
-	max-height: 38rem;
-	max-width: 40rem;
-	/* background-color: red; */
+  max-height: 38rem;
+  max-width: 40rem;
+  /* background-color: red; */
+  overflow: hidden;
+}
+
+.Product:hover {
+  box-shadow: 0 0 10px #ccc;
 }
 
 .Product:hover .ProductCart {
-	display: block;
+  display: block;
 }
 
 .ProductHeader {
-	position: relative;
-	border-radius: 3px;
-	overflow: hidden;
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .ProductImage {
-	height: 30rem;
-	width: 100%;
-	/* position: absolute; */
-	background-color: pink;
+  height: 30rem;
+  width: 100%;
+  /* position: absolute; */
+  background-color: pink;
 }
 
 .ProductImage img {
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-
 .ProductCart {
-	position: absolute;
-	top: 1rem;
-	left: 1.5rem;
-	/* margin-bottom: -3px; */
-	display: none;
-	background-color: rgba(255,255,255,60%);
-	border-radius: 3px;
-	/* opacity: 10%; */
-	padding: 5px 5px 0 5px;
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  /* margin-bottom: -3px; */
+  display: none;
+  background-color: rgba(255, 255, 255, 60%);
+  border-radius: 3px;
+  /* opacity: 10%; */
+  padding: 5px 5px 0 5px;
 }
 
 .ProductCart button {
-	color: var(--secondary-color);
-	cursor: pointer;
-	background-color: transparent;
-	border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 .ProductTitle {
-	width: 100%;
-	/* background-color: burlywood; */
+  width: 100%;
+  /* background-color: burlywood; */
 }
 
 .ProductTitle h3 {
-	font-size: 2.5rem;
-	font-weight: 600;
-	text-transform: capitalize;
-	text-align: center;
-	padding:0;
-	margin: 0;
-	color: #222;
-	/* background-color: orange; */
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: var(--primary-color);
+  /* background-color: orange; */
 }
 
 .ProductPrice {
-	width: 100%;
-	font-size: 1.8rem;
-	font-style: italic;
-	font-weight: 400;
-	text-align: center;
-	display: inline-block;
-	/* background-color: pink; */
-	margin-top: -2rem;
+  width: 100%;
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  /* background-color: pink; */
+  margin-top: -2rem;
 }

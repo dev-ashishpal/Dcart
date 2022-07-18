@@ -15,15 +15,14 @@
 }
 
 .Modal::-webkit-scrollbar {
-  width: 0.8rem;
-  background-color: transparent;
+  display: none;
 }
-.Modal::-webkit-scrollbar-thumb {
+/* .Modal::-webkit-scrollbar-thumb {
   background-color: var(--primary-color-light);
   border-radius: 1rem;
   width: 0.8rem;
   transition: background-color 0.2s;
-}
+} */
 
 
 @media (max-width: 900px) and (min-width: 600px) {

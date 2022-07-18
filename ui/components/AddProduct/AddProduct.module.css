@@ -1,0 +1,203 @@
+.Auth {
+  width: 800px;
+}
+
+.Header h1 {
+  font-weight: 400;
+  font-size: 4rem;
+  margin: 2rem 4rem 0 4rem;
+  text-transform: capitalize;
+}
+
+.Form {
+  width: 100%;
+}
+
+.FormInputs {
+  margin: 0 5rem;
+}
+
+.Select {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.Input {
+  margin-bottom: 1rem;
+  height: 4rem;
+}
+
+.Input input,
+.Input textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: inherit;
+  font-family: inherit;
+  border-bottom: 1px solid var(--primary-color-light);
+  outline: none;
+}
+
+.Input input {
+  padding-top: 2rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.Input input::-webkit-outer-spin-button,
+.Input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.Input input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.Input textarea {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  margin-top: 1rem;
+  resize: none;
+}
+
+.Input textarea::-moz-focus-inner {
+  background-color: none;
+}
+
+.Input textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.Input input::-webkit-input-placeholder,
+.Input textarea::-webkit-input-placeholder {
+  text-transform: uppercase;
+  color: var(--primary-color-light);
+}
+
+.Input.Invalid input,
+.Input.Invalid textarea {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.SubmitBtn {
+  margin-top: 3rem;
+  height: 4.5rem;
+  width: 100%;
+}
+
+.SubmitBtn button {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 3rem;
+  background-color: var(--secondary-color);
+}
+
+.SubmitBtn button:disabled {
+  background-color: var(--secondary-color-light);
+  cursor: not-allowed;
+}
+
+.ImageBox {
+  display: flex;
+}
+
+.ImageBoxLabel {
+  display: block;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--primary-color-light);
+}
+
+.InputBox {
+  width: 17.5rem;
+  height: 12rem;
+  position: relative;
+  border-radius: 5px;
+  background-color: var(--primary-color-light);
+  cursor: pointer;
+  /* margin-right: 3rem; */
+}
+
+.InputBox input {
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+}
+
+.Icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.Icon svg {
+  fill: var(--primary-color);
+  height: 100%;
+  width: 100%;
+}
+
+.ImagePreview {
+  margin-left: 3rem;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 17.5rem;
+  height: 12rem;
+  position: relative;
+}
+
+.ImagePreview img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+}
+
+.ImagePreview figcaption {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.UploadBtn {
+	cursor: pointer;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 3px;
+	height: 3.2rem;
+	width: 3.2rem;
+	border: none;
+	outline: none;
+
+}
+
+.UploadBtn svg {
+	height: 100%;
+	width: 100%;
+	fill: var(--primary-color);
+}

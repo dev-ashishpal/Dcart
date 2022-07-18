@@ -19,11 +19,11 @@ library Library {
     }
     struct Item {
         bytes32 itemName;
-        uint8 itemType;
         uint256 itemPrice;
-        bytes32 itemDetails;
-        bytes32 imageId;
+        string itemDetails;
+        bytes32 itemBrand;
         uint32 availableCount;
+        string imageUrl;
         address payable seller;
     }
 

@@ -1,0 +1,113 @@
+.Box {
+  margin: 15rem 6rem 0 6rem;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+}
+
+.ImageBox {
+  background-color: orange;
+  height: 60rem;
+}
+
+.ImageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ContentBox {
+  padding: 0 3rem;
+}
+
+.ContentHeader h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+
+.Brand {
+  font-size: 2rem;
+  color: var(--primary-color-light);
+}
+.Price {
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  /* font-style: italic; */
+}
+
+.Line {
+  border: 0;
+  height: 1px;
+  background: hsla(
+    var(--primary-color-h),
+    var(--primary-color-s),
+    var(--primary-color-l),
+    0.2
+  );
+  /* background-image: linear-gradient(to right, var(--primary-color-light), var(--primary-color), var(--primary-color-light)); */
+}
+
+.Description header h5 {
+  margin-top: 3rem;
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.CounterBox {
+	margin-top: 5rem;
+}
+
+.CounterBox button {
+  background-color: var(--secondary-color);
+  width: 3rem;
+  font-weight: 600;
+  font-size: 2rem;
+  font-family: inherit;
+  /* border: none; */
+  border-top: 1px solid var(--primary-color-light);
+  border-bottom: 1px solid var(--primary-color-light);
+  cursor: pointer;
+  /* display: flex; */
+}
+
+.CounterBox span {
+  padding: 0 1rem;
+  font-size: 2rem;
+  font-family: inherit;
+  border-top: 1px solid var(--primary-color-light);
+  border-bottom: 1px solid var(--primary-color-light);
+}
+
+.DecBtn {
+  border-radius: 1rem 0 0 1rem;
+  border: none;
+  border-left: 1px solid var(--primary-color-light);
+}
+.IncBtn {
+  border-radius: 0 1rem 1rem 0;
+  border: none;
+  border-right: 1px solid var(--primary-color-light);
+
+}
+
+
+.Button {
+	margin-top: 4rem;
+}
+
+.Button button {
+	background-color: var(--secondary-color);
+	border: none;
+	border-radius: 1rem;
+	font-size: 2.5rem;
+	font-family: inherit;
+	padding: 1rem 4rem;
+	cursor: pointer;
+	/* font-weight: 600; */
+	color: var(--primary-color);
+	
+}

@@ -41,6 +41,8 @@ a {
   --secondary-color-s: 74%;
   --secondary-color-l: 56%;
 
+  --tertiary-color: #2A9D8F;
+
   --text-color-white: hsl(51, 100%, 83%);
   --text-color-white-h: 51;
   --text-color-white-s: 100%;

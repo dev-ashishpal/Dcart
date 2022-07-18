@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useState, useMemo, useRef } from "react";
 import classes from "./profile.module.css";
+import useBalanceStats from "../../hooks/useBalanceStats";
+import { useWeb3Context } from "../../context/Web3Context";
+import useUserStats from "../../hooks/useUserStats";
+// import useCheckUser from "../../hooks/useCheckUser";
 
 const Profile = () => {
+  const inputRef = useRef();
+  const {token, address, admin} = useWeb3Context();
+
+  const balanceStats = useBalanceStats();
+  const userStats = useUserStats();
+  // use MEMO ....
+
+  const buyToken = async (event) => {
+    event.preventDefault();
+    const tokenPrice = await token.methods.tokenPrice().call();
+    const amount = inputRef.current.value;
+    await token.methods
+      .buyToken(amount)
+      .send({ from: address,value: amount * tokenPrice, to: admin, gas: 100000 });
+      inputRef.current.value = "";
+  };
+  
+
   return (
     <section className={classes.Profile}>
       <div className={classes.ProfileHeader}>
         <header>
-          <h1>Ashish Pal</h1>
-          <span>Male</span>
+          <h1>{userStats.name || "-"}</h1>
+          <span>{userStats.gender || "-"}</span>
         </header>
         <div className={classes.ProfileHeaderRight}>
-          <div>buyer</div>
+          <div>{userStats.type || "-"}</div>
         </div>
       </div>
       <div className={classes.Contact}>
@@ -22,13 +44,13 @@ const Profile = () => {
             <h5 className={classes.ContactDetailBoxTitle}>Phone:</h5>
             <a className={classes.ContactDetailBoxValue} href="tel:8059379276">
               <span>+91</span>
-              <span>8059379276</span>
+              <span>{userStats.contact || "-"}</span>
             </a>
           </div>
           <div className={classes.ContactDetailBox}>
             <h5 className={classes.ContactDetailBoxTitle}>Address:</h5>
             <div className={classes.ContactDetailBoxValue}>
-              VPO Khudda Kalan, Ambala Cantt, Haryana 133104
+              {userStats.address || "-"}
             </div>
           </div>
           <div className={classes.ContactDetailBox}>
@@ -37,7 +59,7 @@ const Profile = () => {
               href="mailto:ashish79276@gmail.com"
               className={classes.ContactDetailBoxValue}
             >
-              ashish79276@gmail.com
+              {userStats.email || "-"}
             </a>
           </div>
         </div>
@@ -49,13 +71,13 @@ const Profile = () => {
         </header>
         <div className={classes.TokenDetail}>
           <div className={classes.TokenDetailBox}>
-            <p>17 eth</p>
+            <p>{Number(balanceStats.ethBalance).toFixed(2)} eth</p>
             <header>
               <h2>ethereum available</h2>
             </header>
           </div>
           <div className={classes.TokenDetailBox}>
-            <p>70900 eth</p>
+            <p>{balanceStats.tokenBalance} Ash</p>
             <header>
               <h2>Ash Token available</h2>
             </header>
@@ -69,12 +91,13 @@ const Profile = () => {
         </div>
         <div className={classes.BuyToken}>
           <form className={classes.BuyTokenForm}>
-            <input type="number"/>
-            <button className={classes.BuyTokenBtn}>buy</button>
+            <input type="number" ref={inputRef} placeholder="eg: 1000" />
+            <button onClick={buyToken} className={classes.BuyTokenBtn}>
+              buy
+            </button>
           </form>
         </div>
       </div>
-
     </section>
   );
 };

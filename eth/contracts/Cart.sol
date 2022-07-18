@@ -6,10 +6,10 @@ import './Token.sol';
 
 contract Cart is Read {
 	address TOKEN;
-	constructor(Token _tokenInstance) {
+	constructor(address _token) {
 		MODEL.P_ID = 1;
 		MODEL.O_ID = 1;
-		TOKEN = _tokenInstance;
+		TOKEN = _token;
 	}
 
 	event SignUp(address indexed user, bytes32 name);
@@ -42,7 +42,7 @@ contract Cart is Read {
         MODEL.Users[msg.sender].userGender = _userGender;
         MODEL.Users[msg.sender].userEmail = _userEmail;
         MODEL.Users[msg.sender].userAddr = _userAddr;
-        MODEL.Users[msg.sender].userType = UserType(_type);
+        MODEL.Users[msg.sender].userType = Enums.UserType(_type);
         emit SignUp(msg.sender, _userName);
     }
 
@@ -50,14 +50,16 @@ contract Cart is Read {
         bytes32 _itemName,
         uint256 _itemPrice,
         uint32 _availableCount,
-        bytes32 _itemDetails,
-        bytes32 _imageId
+        string calldata _itemDetails,
+        bytes32 _itemBrand,
+        string calldata _imageUrl
     ) external onlySeller {
         MODEL.Product[MODEL.P_ID].itemName = _itemName;
         MODEL.Product[MODEL.P_ID].itemPrice = _itemPrice;
         MODEL.Product[MODEL.P_ID].itemDetails = _itemDetails;
         MODEL.Product[MODEL.P_ID].availableCount = _availableCount;
-        MODEL.Product[MODEL.P_ID].imageId = _imageId;
+        MODEL.Product[MODEL.P_ID].itemBrand = _itemBrand;
+        MODEL.Product[MODEL.P_ID].imageUrl = _imageUrl;
         MODEL.Product[MODEL.P_ID].seller = payable(msg.sender);
         MODEL.P_ID++;
         emit AddItem(_itemName, MODEL.P_ID);
@@ -79,7 +81,7 @@ contract Cart is Read {
             MODEL.prodList[MODEL.Product[_prodIds[i]].seller][MODEL.O_ID].push(_prodIds[i]);
             MODEL.prodTotal[MODEL.O_ID][_prodIds[i]] = _prodCounts[i];
             total += MODEL.Product[_prodIds[i]].itemPrice * _prodCounts[i];
-			TOKEN.transfer(MODEL.Product[_prodIds[i]].seller, MODEL.Product[_prodIds[i]].itemPrice * _prodCounts[i]);
+			Token(TOKEN).transfer(msg.sender, MODEL.Product[_prodIds[i]].seller, MODEL.Product[_prodIds[i]].itemPrice * _prodCounts[i]);
             MODEL.Product[_prodIds[i]].availableCount -= _prodCounts[i];
             MODEL.MarketOrder[MODEL.O_ID].isOrdered[_prodIds[i]] = true;
         }
@@ -94,4 +96,93 @@ contract Cart is Read {
 		// TOKEN.transfer()
         emit Order(msg.sender, MODEL.O_ID);
     }
+
+    function order(
+        string calldata _orderDetails,
+        uint32 _prodId,
+        uint32 _prodCount
+    ) external onlyBuyer {
+        require(MODEL.MarketOrder[MODEL.O_ID].isOrdered[_prodId] == false);
+        require(MODEL.Product[_prodId].availableCount >= _prodCount);
+
+        MODEL.orderList[MODEL.Product[_prodId].seller].push(MODEL.O_ID);
+        MODEL.prodList[MODEL.Product[_prodId].seller][MODEL.O_ID].push(_prodId);
+        MODEL.prodTotal[MODEL.O_ID][_prodId] = _prodCount;
+        uint256 total = MODEL.Product[_prodId].itemPrice * _prodCount;
+        
+        MODEL.Product[_prodId].availableCount -= _prodCount;
+        MODEL.MarketOrder[MODEL.O_ID].isOrdered[_prodId] = true;
+
+        MODEL.MarketOrder[MODEL.O_ID].BuyerAddr = payable(msg.sender);
+        MODEL.MarketOrder[MODEL.O_ID].timeStamp = block.timestamp;
+        MODEL.MarketOrder[MODEL.O_ID].orderDetails = _orderDetails;
+        MODEL.MarketOrder[MODEL.O_ID].totalPrice = total;
+        MODEL.Users[msg.sender].orders.push(MODEL.O_ID);
+        MODEL.O_ID++;
+        Token(TOKEN).transfer(msg.sender, MODEL.Product[_prodId].seller, MODEL.Product[_prodId].itemPrice * _prodCount);
+        // ISpecToken(TOKEN).sendTokens(total, msg.sender);
+		// TOKEN.transfer()
+        emit Order(msg.sender, MODEL.O_ID);
+    }
+
+    function confirmOrder(uint32 _o_Id, uint32 _p_Id) external onlySeller {
+        require(MODEL.Product[_p_Id].seller == msg.sender, "Only Seller");
+        require(
+            MODEL.MarketOrder[_o_Id].isOrdered[_p_Id] == true &&
+                MODEL.MarketOrder[_o_Id].isConfirmed[_p_Id] == false &&
+                MODEL.MarketOrder[_o_Id].isRejected[_p_Id] == false &&
+                MODEL.MarketOrder[_o_Id].isCancelled[_p_Id] == false,
+            "Conditions not satisfied"
+        );
+        MODEL.MarketOrder[_o_Id].isConfirmed[_p_Id] = true;
+        emit Order(msg.sender, _o_Id);
+    }
+
+    // function rejectOrder(uint32 _o_Id, uint32 _p_Id) external onlySeller {
+    //     require(MODEL.Product[_p_Id].seller == msg.sender, "Only Seller");
+    //     require(
+    //             MODEL.MarketOrder[_o_Id].isOrdered[_p_Id] == true &&
+    //             MODEL.MarketOrder[_o_Id].isConfirmed[_p_Id] == false &&
+    //             MODEL.MarketOrder[_o_Id].isRejected[_p_Id] == false &&
+    //             MODEL.MarketOrder[_o_Id].isDispute[_p_Id] == false &&
+    //             MODEL.MarketOrder[_o_Id].isCancelled[_p_Id] == false
+    //     );
+    //     cancel(_o_Id,_p_Id);
+    //     emit Order(msg.sender, _o_Id);
+    // }
+
+    function shipOrder(uint32 _o_Id, uint32 _p_Id) external onlySeller {
+        require(MODEL.Product[_p_Id].seller == msg.sender, "Only Seller");
+        require(
+            MODEL.MarketOrder[_o_Id].isConfirmed[_p_Id] == true &&
+                MODEL.MarketOrder[_o_Id].isShipped[_p_Id] == false &&
+                MODEL.MarketOrder[_o_Id].isRejected[_p_Id] == false &&
+                MODEL.MarketOrder[_o_Id].isCancelled[_p_Id] == false,
+            "Conditions not satisfied"
+        );
+        MODEL.MarketOrder[_o_Id].isShipped[_p_Id] = true;
+        emit Order(msg.sender, _o_Id);
+    }
+
+    function confirmDelivery(uint32 _o_Id, uint32 _p_Id) external onlyBuyer {
+        require(MODEL.MarketOrder[_o_Id].BuyerAddr == msg.sender, "Only Buyer");
+        require(
+            MODEL.MarketOrder[_o_Id].isShipped[_p_Id] == true &&
+                MODEL.MarketOrder[_o_Id].confirmDelivery[_p_Id] == false &&
+                MODEL.MarketOrder[_o_Id].isCancelled[_p_Id] == false,
+            "Conditions not satisfied"
+        );
+        MODEL.MarketOrder[_o_Id].confirmDelivery[_p_Id] = true;
+        
+        emit Order(msg.sender, _o_Id);
+    }
+
+    // function cancel(uint32 _o_Id, uint32 _p_Id) private {
+    //     MODEL.MarketOrder[_o_Id].isCancelled[_p_Id] = true;
+    //     ISpecToken(TOKEN).collectTokens(
+    //         SPEC.Product[_p_Id].itemPrice.add(SPEC.Product[_p_Id].disputePrice),
+    //         msg.sender
+    //     );
+    //     SPEC.Product[_p_Id].availableCount += SPEC.prodTotal[_o_Id][_p_Id];
+    // }
 }

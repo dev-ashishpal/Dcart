@@ -1,0 +1,110 @@
+.Header h1 {
+  font-size: 4.5rem;
+  color: inherit;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.Container {
+  margin: 10rem 6rem 0 6rem;
+}
+
+.Section {
+  margin-top: 5rem;
+}
+
+.FlexBox {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ddd;
+  padding: 1.5rem 2rem;
+  border-radius: 5px;
+  margin-bottom: 5rem;
+}
+.FlexBoxIn {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-radius: 5px;
+}
+
+.Flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Title {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  /* background-color: orangered;	 */
+  width: 18rem;
+}
+
+.Red {
+	color: var(--secondary-color);
+}
+
+.Green {
+	color: var(--tertiary-color);
+}
+
+.Bold {
+	font-weight: 600;
+}
+
+.Width {
+	width: 10rem;
+}
+
+.Id {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.Status {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  width: 18rem;
+}
+
+.Flex div:not(:last-of-type) {
+  margin-right: 2rem;
+}
+
+.Flex h5:not(:last-of-type) {
+	margin-right: 2rem;
+}
+
+.Btn {
+	background-color: var(--tertiary-color);
+	border: none;
+	padding: 5px 10px;
+	font-family: inherit;
+	text-transform: uppercase;
+	font-size: 1.4rem;
+	border-radius: 3px;
+	color: var(--primary-color);
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.Reject {
+	background-color: var(--secondary-color);
+}
+
+.Confirm {
+	background-color: var(--primary-color-light);
+}
+
+.Btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.Faded {
+	opacity: 0.5;
+	cursor:not-allowed;
+}

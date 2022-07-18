@@ -6,6 +6,7 @@ import './Library.sol';
 contract Read {
 	using Library for Library.CartModel;
 	Library.CartModel MODEL;
+    
 
 	modifier onlySeller() {
         require(uint256(MODEL.Users[msg.sender].userType) == 2, "only seller");
@@ -34,19 +35,45 @@ contract Read {
         returns (
             bytes32 itemName,
             uint256 itemPrice,
-            bytes32 itemDetails,
-            bytes32 imageId,
-            uint32 availableCount
+            bytes32 itemBrand,
+            string memory itemDetails,
+            uint32 availableCount,
+            string memory imageUrl
         )
     {
         return (
             MODEL.Product[_id].itemName,
             MODEL.Product[_id].itemPrice,
-            MODEL.Product[_id].imageId,
+            MODEL.Product[_id].itemBrand,
             MODEL.Product[_id].itemDetails,
-            MODEL.Product[_id].availableCount
+            MODEL.Product[_id].availableCount,
+            MODEL.Product[_id].imageUrl
         );
     }
+
+    function sellerProduct(uint32 _id)
+        public
+        view
+        returns (
+            bytes32 itemName,
+            uint256 itemPrice,
+            bytes32 itemBrand,
+            string memory itemDetails,
+            uint32 availableCount,
+            string memory imageUrl
+        )
+    {
+        require(msg.sender == MODEL.Product[_id].seller);
+        return (
+            MODEL.Product[_id].itemName,
+            MODEL.Product[_id].itemPrice,
+            MODEL.Product[_id].itemBrand,
+            MODEL.Product[_id].itemDetails,
+            MODEL.Product[_id].availableCount,
+            MODEL.Product[_id].imageUrl
+        );
+    }
+
 
     function productsList(address _seller, uint32 _o_id) external view returns (uint32[] memory prodId) {
         return (MODEL.prodList[_seller][_o_id]);
@@ -134,7 +161,5 @@ contract Read {
             MODEL.MarketOrder[_o_id].isCancelled[_p_id],
             MODEL.MarketOrder[_o_id].confirmDelivery[_p_id]
         );
-    }
-
-    
+    }    
 }

@@ -7,13 +7,16 @@ import NavItem from "./NavigationItem/NavigationItem";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import Auth from "../../Auth/Auth";
+import useCheckUser from "../../../hooks/useCheckUser";
 
 const NavigationItems = (props) => {
+  const userAuth = useCheckUser();
   const router = useRouter();
   const [show, setShow] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  // console.log('userauth', userAuth);
   const openAuth = (link) => {
-    if (loggedIn === false) {
+    if (userAuth == 0) {
       setShow(true);
     } else {
       router.push(link);
@@ -22,13 +25,17 @@ const NavigationItems = (props) => {
   const closeModal = () => {
     setShow(false);
   };
+  const userDiv = null;
+  if(userAuth == 1) {
+    userDiv = (<div className={classes.UserType}>Buyer</div>)
+  } else if(userAuth == 2) {
+    userDiv = <div className={classes.UserType}>Seller</div>;
+  }
   return (
     <ul className={classes.NavigationList}>
       <Auth show={show} clicked={closeModal} />
       <div className={classes.NavigationStart}>
-        <NavItem button onClick={""}>
-          <MdSearch />
-        </NavItem>
+        {userDiv}
       </div>
 
       <div className={classes.NavigationCenter}>
@@ -53,13 +60,13 @@ const NavigationItems = (props) => {
             </NavItem>
           </span>
         </div>
-        <span onClick={() => {openAuth("/cart");}}>
+        {/* <span onClick={() => {openAuth("/cart");}}>
           <NavItem href="/cart">
             <span className="Icon">
               <MdShoppingCart />
             </span>
           </NavItem>
-        </span>
+        </span> */}
       </div>
     </ul>
   );

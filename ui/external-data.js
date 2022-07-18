@@ -26,12 +26,7 @@ export const LatestCollection = [
 ];
 
 export const VisitedCollection = [
-  {
-    id: "5",
-    title: "Blonde For Sale",
-    image: "/images/5.jpg",
-    price: "A. 99999",
-  },
+  
   {
     id: "6",
     title: "Eau De Parfum",
