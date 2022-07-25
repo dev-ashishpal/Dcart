@@ -32,7 +32,6 @@ const Home = () => {
           <h1>Call To Action</h1>
         </header>
         <div className={classes.HeroContainer}>
-          {/* this is fucking shit. */}
           <div className={classes.Cta}>
             {web3 ? (
               <Button onClick={disconnect}>Disconnect</Button>

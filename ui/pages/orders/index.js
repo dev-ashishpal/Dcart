@@ -8,6 +8,8 @@ import useCheckUser from "../../hooks/useCheckUser";
 
 import { useWeb3Context } from "../../context/Web3Context";
 
+import Spinner from "../../components/UI/Spinner/Spinner";
+
 const Order = () => {
   const { cart, address } = useWeb3Context();
   const userType = useCheckUser();
@@ -58,7 +60,7 @@ const Order = () => {
     console.log(res.status);
   };
 
-  let article = <div>Loading ...</div>;
+  let article = <div className={classes.Center}><Spinner /></div>;
 
   if (userType == 1 && orderStats) {
     article = (

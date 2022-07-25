@@ -111,3 +111,15 @@
 	color: var(--primary-color);
 	
 }
+
+.Button button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.Center {
+  display: flex;
+  height: 70rem;
+  align-items: center;
+  justify-content: center;
+}

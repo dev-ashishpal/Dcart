@@ -2,6 +2,13 @@
   margin: 10rem 6rem 0 6rem;
 }
 
+.Center {
+	height: 50rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .ProfileHeader {
   /* background-color: orangered; */
   display: flex;

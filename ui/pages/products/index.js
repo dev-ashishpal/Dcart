@@ -18,7 +18,6 @@ const Products = () => {
   const closeModal = () => {
     setShow(false);
   };
-  // const Collection = LatestCollection.push(VisitedCollection);
   const userAuth = useCheckUser();
 
   const productStat = useProductStats();
@@ -37,7 +36,6 @@ const Products = () => {
       console.log("status", res.status);
     }
   };
-  // console.log(cart);
 
   return (
     <main className={classes.Container}>
@@ -51,7 +49,7 @@ const Products = () => {
       ) : null}
 
       <header className={classes.Header}>
-        <h1>Explore All Products</h1>
+        <h1>All Products</h1>
       </header>
       <div className={classes.Sort}>
         <div className={classes.SortRight}></div>

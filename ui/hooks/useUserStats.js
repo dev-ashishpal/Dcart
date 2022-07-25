@@ -5,7 +5,7 @@ import { useWeb3Context } from "../context/Web3Context";
 const useUserStats = () => {
   const { fastRefresh } = useRefresh();
   const { web3, cart, address } = useWeb3Context();
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState(null);
   let data = {};
   useEffect(() => {
     async function userStats() {

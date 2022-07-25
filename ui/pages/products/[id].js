@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import classes from "./product.module.css";
 import { useWeb3Context } from "../../context/Web3Context";
 import useRefresh from "../../hooks/useRefresh";
-import { MdAdd } from "react-icons/md";
-// import useSingleProductStats from '../../hooks/useSingleProductStats';
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 const SingleProduct = () => {
   const router = useRouter();
@@ -16,7 +15,9 @@ const SingleProduct = () => {
 
   const increase = () => {
     const num = counter;
-    setCounter(num + 1);
+    if (product.availableCount > num) {
+      setCounter(num + 1);
+    }
   };
 
   const decrease = () => {
@@ -54,10 +55,12 @@ const SingleProduct = () => {
     fetch();
   }, [setProduct, fastRefresh]);
 
+  console.log("product", product);
+
   return (
-    <div className={classes.Box}>
+    <Fragment>
       {!!product ? (
-        <Fragment>
+        <div className={classes.Box}>
           <figure className={classes.ImageBox}>
             <img src={product.imageUrl} />
           </figure>
@@ -86,14 +89,20 @@ const SingleProduct = () => {
               </button>
             </div>
             <div className={classes.Button}>
-              <button onClick={buy}>BUY</button>
+              {product.availableCount > 0 ? (
+                <button onClick={buy}>BUY</button>
+              ) : (
+                <button disabled>Out Of Stock</button>
+              )}
             </div>
           </div>
-        </Fragment>
+        </div>
       ) : (
-        <div>loading.........</div>
+        <div className={classes.Center}>
+          <Spinner />
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

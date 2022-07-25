@@ -13,7 +13,7 @@ const useOrdersStats = () => {
   let data = [];
   useEffect(() => {
     async function getData() {
-      if (userStats.orders && userType == 1) {
+      if (userStats && userType == 1) {
         for (let order of userStats.orders) {
           const market = await cart.methods
             .marketOrder(order)

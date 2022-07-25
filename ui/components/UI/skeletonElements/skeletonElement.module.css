@@ -1,5 +1,5 @@
 .Skeleton {
-    background-color: var(--color-tertiary1);
+    background-color: #333;
     border-radius: 4px;
 }
 
@@ -23,4 +23,9 @@
 .Skeleton.span {
     width: 5rem;
     height: .5rem;
+}
+
+.Skeleton.span {
+    width: 10rem;
+    height: 2rem;
 }
